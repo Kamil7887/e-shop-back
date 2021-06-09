@@ -38,14 +38,6 @@ class TestUser(TestCase):
             _ = create_user(email=self.INVALID_EMAIL,
                             password=self.VALID_PASSWORD)
 
-    def test_user_creation_with_invalid_password_fails(self):
-        """
-        password must be string with 8 chars or more
-        """
-        with self.assertRaises(ValueError):
-            _ = create_user(email=self.VALID_EMAIL,
-                            password=self.INVALID_PASSWORD)
-
     def test_super_user_creation_pass(self):
         user = get_user_model().objects.create_superuser(
             email=self.VALID_EMAIL, password=self.VALID_PASSWORD)

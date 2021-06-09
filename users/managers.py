@@ -13,12 +13,6 @@ class CustomUserManager(BaseUserManager):
         else:
             return email
 
-    def validate_password(self, password):
-        if len(password) < 8:
-            raise ValueError('Password must be more than 7 char')
-        else:
-            return password
-
     def create_user(self, email, password, **extra_fields):
         """
         Create and save a User with the given email and password.
@@ -26,7 +20,6 @@ class CustomUserManager(BaseUserManager):
         if email is None:
             raise ValueError('The Email must be set')
         email = self.validate_email(email)
-        password = self.validate_password(password)
         user = self.model(email=email, **extra_fields)
         user.set_password(password)
         user.save()

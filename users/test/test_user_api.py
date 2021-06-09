@@ -1,11 +1,10 @@
-from django.test import TestCase, client
+from django.test import TestCase
 from django.contrib.auth import get_user_model
 from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APIClient
-from users.serializers import UserSerializer
 
-CREATE_USER_URL = reverse('user:create')
+CREATE_USER_URL = reverse('users:create')
 VALID_EMAIL = 'test@gmail.com'
 INVALID_EMAIL = 'testmail'
 USERNAME = 'test'
@@ -13,7 +12,7 @@ VALID_PASSWORD = 'password'
 INVALID_PASSWORD = 'pass'
 FIRST_NAME = 'first_name'
 LAST_NAME = 'last_name'
-BIRTHDAY = '29-10-1996'
+BIRTHDAY = '1996-10-29'
 
 
 def create_user(email, password, **kwargs):
