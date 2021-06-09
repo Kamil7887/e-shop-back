@@ -20,7 +20,7 @@ BIRTHDAY = '1996-10-29'
 def create_user(**kwargs):
     email = kwargs.pop('email')
     password = kwargs.pop('password')
-    return get_user_model().objects.create_user(email, password, kwargs)
+    return get_user_model().objects.create_user(email, password, **kwargs)
 
 
 class PublicUserApiTest(TestCase):
