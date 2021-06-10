@@ -4,9 +4,11 @@ from transliterate import translit
 
 
 class ProductSerializer(serializers.ModelSerializer):
+    id = serializers.ReadOnlyField()
+
     class Meta:
         model = Product
-        fields = ['title', 'slug', 'description',
+        fields = ['id', 'title', 'price', 'slug', 'description',
                   'publisher', 'publication_date']
         extra_kwargs = {'slug': {'read_only': True}}
 
