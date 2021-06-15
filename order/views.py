@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from rest_framework import generics, permissions, authentication
+from order.models import Order
+from order.serializers import OrderSerializer
 # Create your views here.
 
 
@@ -14,11 +16,13 @@ class PostIfSuperuserPermission(permissions.BasePermission):
 
 
 class ListCreateOrderView(generics.ListCreateAPIView):
-    pass
-    # queryset = Order.objects.all()
-    # serializer_class = OrderSerializer
-    # authentication_classes = [authentication.TokenAuthentication, ]
-    # permission_classes = [PostIfSuperuserPermission, ]
+    serializer_class = OrderSerializer
+    authentication_classes = [authentication.TokenAuthentication, ]
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        user = self.request.user
+        return Order.objects.filter(user_id=user.id)
 
 
 class UpdateDeleteIfSuperuserPermission(permissions.BasePermission):
@@ -32,8 +36,14 @@ class UpdateDeleteIfSuperuserPermission(permissions.BasePermission):
 
 
 class RetrieveUpdateDestroyOrderView(generics.RetrieveUpdateDestroyAPIView):
-    pass
-    # queryset = Order.objects.all()
-    # serializer_class = OrderSerializer
-    # authentication_classes = [authentication.TokenAuthentication, ]
-    # permission_classes = [UpdateDeleteIfSuperuserPermission, ]
+    serializer_class = OrderSerializer
+    authentication_classes = [authentication.TokenAuthentication, ]
+    permission_classes = [permissions.IsAuthenticated,
+                          UpdateDeleteIfSuperuserPermission]
+
+    def get_queryset(self):
+        user = self.request.user
+        if(user.is_superuser == True):
+            return Order.objects.all()
+        else:
+            return Order.objects.filter(user_id=user.id)
