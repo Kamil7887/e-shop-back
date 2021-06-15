@@ -50,3 +50,8 @@ class TestUser(TestCase):
         with self.assertRaises(IntegrityError):
             _ = create_user(email=self.VALID_EMAIL,
                             password=self.VALID_PASSWORD)
+
+    def test_user_id_created(self):
+        user = create_user(email=self.VALID_EMAIL,
+                           password=self.VALID_PASSWORD)
+        self.assertIsNotNone(user.id)
