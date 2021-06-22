@@ -1,8 +1,6 @@
-from rest_framework.settings import perform_import
 from product.serializers import ProductSerializer
-from django.shortcuts import render
 from product.models import Product
-from rest_framework import generics, authentication, permissions, viewsets
+from rest_framework import generics, authentication, permissions
 
 
 class PostIfSuperuserPermission(permissions.BasePermission):

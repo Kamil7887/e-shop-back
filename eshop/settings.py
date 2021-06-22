@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'users',
     'product',
     'order',
+    'order_product_list',
     'transliterate',
 ]
 
