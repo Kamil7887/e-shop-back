@@ -9,7 +9,7 @@ class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
         fields = ['id', 'title', 'price', 'slug', 'description',
-                  'publisher', 'publication_date']
+                  'publisher', 'publication_date', 'image']
         extra_kwargs = {'slug': {'read_only': True}}
 
     def create(self, validated_data):

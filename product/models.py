@@ -7,7 +7,7 @@ import os
 def generate_product_image_file_path(instance, filename):
     extension = filename.split('.')[-1]
     filename = f'{uuid.uuid4}.{extension}'
-    return os.path.join('product/', filename)
+    return os.path.join('product/images/', filename)
 
 
 class Product(models.Model):
